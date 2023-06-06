@@ -95,16 +95,13 @@ public class AuthenticationController {
             return "login";
         }
         User existingUser = userRepository.findByUsername(loginFormDTO.getUsername());
-        System.out.println(existingUser);
         if (existingUser == null){
             errors.rejectValue("username", "username.doesntexists","Username doesn't exists.");
             model.addAttribute("title", "Log In");
             return "login";
         }
         String pass = loginFormDTO.getPassword();
-        System.out.println(pass);
         if(!existingUser.isMatchingPassword(pass)){
-            System.out.println("here");
             errors.rejectValue("password", "password.isntcorrect","Password is incorrect.");
             model.addAttribute("title", "Log In");
             return "login";
